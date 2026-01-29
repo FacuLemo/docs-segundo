@@ -1,0 +1,46 @@
+site_name: Desarrollo Backend
+theme:
+  name: material
+  palette:
+    # Dark Mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Dark mode
+      primary: green
+      accent: deep purple
+
+    # Light Mode
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Light mode
+      primary: blue
+      accent: deep orange
+  font:
+    text: Merriweather Sans
+    code: Red Hat Mono
+
+# nav:
+#   - Clase 1. Inicio del curso: index.md
+#   - Clase 2. Creando un proyecto de Django: clase2.md
+#   - Clase 3. Nuestro Hola Mundo con vistas y urls : clase3.md
+#   - Clase 4. Templates HTML: clase4.md
+#   - Clase 5. Lógica (Bucles/Condicionales) con Jinja2: clase5.md
+#   - Clase 6. Herencia de Plantillas y Navegación: clase6.md
+#   - Clase 7. Modelos y  Base de Datos: clase7.md
+#   - Clase 8. Personalizando el Admin: clase8.md
+#   - Clase 9. Formularios para crear datos: clase9.md
+#   - Clase 10. Editar y Eliminar desde las vistas (CRUD Completo): clase10.md
+
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
