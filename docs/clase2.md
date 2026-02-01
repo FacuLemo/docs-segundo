@@ -1,5 +1,5 @@
 
-# Segunda Clase: Crear un proyecto de FastAPI
+# Clase 2.  Crear un proyecto de FastAPI
 
 ## 1. Configuración del Entorno 
 
