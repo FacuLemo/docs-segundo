@@ -21,8 +21,8 @@ theme:
     text: Merriweather Sans
     code: Red Hat Mono
 
-# nav:
-#   - Clase 1. Inicio del curso: index.md
+nav:
+ - Clase 1. Inicio del curso: index.md
 #   - Clase 2. Creando un proyecto de Django: clase2.md
 #   - Clase 3. Nuestro Hola Mundo con vistas y urls : clase3.md
 #   - Clase 4. Templates HTML: clase4.md
