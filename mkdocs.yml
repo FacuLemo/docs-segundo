@@ -22,8 +22,8 @@ theme:
     code: Red Hat Mono
 
 nav:
- - Clase 1. Inicio de cursada: clase1.md
-#   - Clase 2. Crear un proyecto de FastAPI: clase2.md
+ - Clase 1. Inicio de cursada: index.md
+ - Clase 2. Crear un proyecto de FastAPI: clase2.md
 #   - Clase 3. el protocolo HTTP : clase3.md
 #   - Clase 4. Documentación automática; Lectura y Creación de datos: clase4.md
 #   - Clase 5. Actualización y Borrado de datos: clase5.md
