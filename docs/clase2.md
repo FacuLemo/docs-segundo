@@ -5,7 +5,7 @@
 
 Para crear un proyecto de fastAPI, necesitaremos instalarlo dentro de un entorno virtual.
 
-Python nos permite aislar instalaciones (dependencias) dentro de un directorio, para que sean usados únicamente por los proyectos contenidos en la misma.
+Python nos permite aislar instalaciones (dependencias) dentro de un directorio, para que sean usados únicamente por los proyectos contenidos en la misma. De esta manera podemos mantener la versión de cada dependencia para evitar conflictos a futuro, tanto para nosotros mismos como para colaboradores.
 
 ### Preparación del Proyecto
 
@@ -21,7 +21,7 @@ python3 -m venv nombre
 
 Una vez creado el entorno virtual, tendremos que activarlo desde nuestra consola. Lo hacemos con el siguiente comando:
 
-* **Linux / Mac:**
+* **Linux:**
 ```bash
 source nombre/bin/activate
 
@@ -39,10 +39,13 @@ source nombre/bin/activate
 
 
 3. **Instalación de dependencias:**
-* (Solo si es necesario en Linux) Instalar pip: `sudo apt install python3-pip` 
+* (Solo si es necesario, en Linux:) Instalar pip: `sudo apt install python3-pip` 
 
 
-* Verificar paquetes instalados: `pip list` 
+* Para verificar paquetes instalados: `pip list`
+
+
+> Deberían ver una lista sin contenidos al hacer pip list. Si ven muchas instalaciones, es porque o no entraron al entorno o porque algo falló en la creación del mismo.
 
 
 * **Instalar FastAPI (versión estándar):**
@@ -54,17 +57,17 @@ pip install fastapi[standard]
 ```
 
 
-* Al instalarse podemos generar archivo que plasme las versiones del proyecto con el comando: `pip freeze` 
+* Al instalarse podemos generar archivo que plasme las versiones del proyecto con el comando: `pip freeze > requirements.txt` 
 
 
-> **Tip Importante:** ¡No olvides seleccionar el intérprete correcto en VSCode! De esta manera podrás detectar errores y programar de manera más fluida.
+> **Consejo:** ¡No olviden seleccionar el intérprete correcto en VSCode! De esta manera podrán detectar errores y programar de manera más fluida.
 
 ---
 
 ## 2. Primeros Pasos: Hola Mundo
 
 
-**Archivo: `main.py`**
+**Creen el archivo: `main.py`**
 
 ```python
 from fastapi import FastAPI
