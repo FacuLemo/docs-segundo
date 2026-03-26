@@ -1,0 +1,13 @@
+/* Permite que el logo tenga un ancho automático y no se comprima */
+.md-header__button.md-logo img {
+    width: auto;
+    height: 40px; 
+    
+}
+
+.md-header__button.md-logo {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
