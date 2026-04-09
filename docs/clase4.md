@@ -11,7 +11,7 @@ En la clase de hoy vamos a ver:
 
 
 * 
-**Parámetros:** Al momento de obtener un registro de nuestra db simulada, lo encontraremos por su ID. Para obtener ese id, lo vamos a pasar como parametro por la ruta. Luego, para modificar un dato existente de ese registro, estaremos consultado el parametro query. Aprenderemos la diferencia entre estos dos.
+**Parámetros path y query:** Al momento de obtener un registro de nuestra db simulada, lo encontraremos por su ID. Para obtener ese id, lo vamos a pasar como parametro por la ruta. Luego, para modificar un dato existente de ese registro, estaremos consultado el parametro query. Aprenderemos la diferencia entre estos dos.
 
 
 
