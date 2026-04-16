@@ -43,7 +43,7 @@ def borrar_juego(id: int):
 
 ## 4. Método PATCH (Actualización Parcial)
 
-El PATCH es ideal para modificar solo *algunos* campos (ej. cambiar el título pero mantener el género).
+El PATCH es sirve para modificar solo *algunos* campos (ej. cambiar el título pero mantener el género).
 
 * Usamos `Optional` o `| None` para indicar que el dato puede o no venir.
 * Usamos condicionales (`if titulo else...`) para actualizar solo lo que el usuario envió.
