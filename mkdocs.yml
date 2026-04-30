@@ -32,7 +32,7 @@ nav:
  - Clase 3. el protocolo HTTP : clase3.md
  - Clase 4. Documentación automática; Lectura y Creación de datos: clase4.md
  - Clase 5. Actualización y Borrado de datos: clase5.md
-#   - Clase 6. Validaciones y Pydantic: clase6.md
+ - Clase 6. Validaciones y Pydantic: clase6.md
 #   - Clase 7. Pydantic Avanzado & REST Clients: clase7.md
 #   - Clase 8. Documentación y Response Model clase8.md
 #   - Clase 9. Modularización con APIRouter: clase9.md
