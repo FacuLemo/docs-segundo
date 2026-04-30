@@ -2,9 +2,11 @@
 
 ## 1. Validaciones Avanzadas (Query & Path)
 
-FastAPI nos permite validar datos numéricos y de texto directamente en los parámetros de la función usando `Query` y `Path`.
+FastAPI nos permite validar datos numéricos y de texto directamente en los parámetros de la función usando `Query()` y `Path()`, para parámetros query y de ruta respectivamente. Se importan desde fastapi.
 
 ### Palabras Clave de Validación
+
+Cada una de las siguientes palabras se usan como parámetro de las funciones `Query()` y `Path()`
 
 * **Longitud:** `min_length`, `max_length` (para strings).
 * **Numéricos:**
@@ -14,11 +16,40 @@ FastAPI nos permite validar datos numéricos y de texto directamente en los par�
 * `le`: Less than or equal (menor o igual que `<=`).
 
 
-* **Metadatos:** `alias`, `deprecated`, `description`.
+* **Metadatos (de cara al frontend):** `alias`, `deprecated`, `description`.
+
+* **Uso:**
+* Parámetro de ruta (Path param)
+```python
+@app.get("/validar/{id}")  # Path operation que sólo retorna el parametro de ruta
+async def validar_id(
+    id: int = Path( #<- parametro tipo entero, asignado por defecto a Path()
+        gt=0, #<- Mayor que 0
+        description="Se lee el id y se devuelve. Debe ser >0", #<- Texto de ayuda
+    )
+):
+    #lógica...
+    return {"id validado": id}
+```
+
+* Parámetro Query
+```python
+@app.get("/query")  # Path operation que retorna el parámetro Query. Se accede localhost:8000/query?q=hola
+async def validar_id(
+    q: str = Query( #<- parametro tipo entero, asignado por defecto a Path()
+        max_length=50, #<- NO debe tener más de 50 caracteres
+        description="Se lee el query 'q' y se devuelve. No debe superar los 50 caracteres", #<- Texto de ayuda
+        deprecated=True, #<- Aviso de que el query está en desuso (obsoleto) (por ejemplo)
+    )
+):
+    #lógica...
+    return {"query": q}
+```
+
 
 ### Implementación con `Annotated`
 
-Es la forma moderna (recomendada) de declarar validaciones.
+Es la forma moderna (recomendada) de declarar validaciones. Ya no se define una igualdad a la función `Path` o `Query` sino a un `Annotated`
 
 ```python
 from typing import Annotated
@@ -26,8 +57,11 @@ from fastapi import FastAPI, Query, Path
 
 # Ejemplo con Query Param "q" (validando un filtro)
 # /items?q=hola (q debe tener min 3 chars y max 50)
-def items(q: Annotated[str | None, Query(min_length=3, max_length=50)] = None):
+@app.get("/items")
+def items(q: Annotated[str | None, Query(min_length=3, max_length=50)] = None): 
+    #^^^Acá el query puede venir vacío, y por defecto es None
     return {"q": q}
+
 
 # Ejemplo con Path Param (validando un ID)
 # /items/5 (id debe ser mayor a 0)
@@ -37,15 +71,15 @@ def get_item(id: Annotated[int, Path(title="ID del item", gt=0)]):
 
 ```
 
-> **Nota:** `Field()` funciona igual que `Query` y `Path` pero se usa dentro de los modelos Pydantic (ver abajo).
+> **Nota:** Además del `Query` y `Path` existe el `Field()`, usado para modelos de Pydantic (ver abajo).
 
 ---
 
 ## 2. Esquemas con Pydantic
 
-En lugar de recibir parámetros sueltos, usamos clases para definir la estructura de nuestros datos. Esto garantiza validación automática de tipos.
+En lugar de recibir parámetros sueltos, usamos clases para definir la estructura de nuestros datos. Esto garantiza validación automática de tipos, directamente desde un modelo en lugar de cuando lo recibimos en el parámetro.
 
-Entonces creamos: (en `main.py` o `schemas.py`)
+Entonces creamos: (en `main.py`)
 
 ```python
 from pydantic import BaseModel
@@ -105,7 +139,6 @@ Ahora nuestros endpoints son mucho más limpios. En lugar de pedir `titulo`, `ge
 @app.post("/agregar-juego")
 def agregar_juego(juego: Juego) -> list[Juego]:
     # .model_dump() convierte el objeto Pydantic a un diccionario de Python
-    # Nota: en versiones viejas de Pydantic v1 se usaba .dict()
     juegos.append(juego.model_dump()) 
     return juegos
 
