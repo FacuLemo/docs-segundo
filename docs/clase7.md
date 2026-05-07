@@ -1,4 +1,4 @@
-# Clase 7. Pydantic Avanzado & REST Clients
+# Clase 7. Pydantic Avanzado
 
 ## 1. Validaciones con `Field` en Pydantic
 
