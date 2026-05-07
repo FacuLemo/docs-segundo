@@ -115,15 +115,14 @@ from fastapi import HTTPException
 async def get_juegos() -> list[Juego]: 
     return juegos
 
-# 2. Retornar un solo objeto Juego + Manejo de Error 404 (se debe importar)
+# 2. Retornar un solo objeto Juego 
 @app.get("/juego/{id}")
 def juego(id: int) -> Juego:
     for juego in juegos:
         if juego["id"] == id:
             return juego
-    
-    # Si no lo encuentra, lanzamos una excepción HTTP
-    raise HTTPException(status_code=404, detail="Juego no encontrado")
+    # Si no lo encuentra, retornamos un msj de erorr
+    return {"detail": "Juego no encontrado"}
 
 ```
 

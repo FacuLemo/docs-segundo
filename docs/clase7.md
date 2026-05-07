@@ -22,7 +22,7 @@ class Juego(BaseModel):
     titulo: str = Field(min_length=4, examples=["Mario", "sonic"])
     genero: str = Field(min_length=4, examples=["Aventura"])
     
-    # Validamos que el score esté entre 0 y 100
+    # Validamos que el score esté entre 0 y 100, como en metracritic por ejemplo
     score: int = Field(gt=0, le=100, examples=[86])
 
 ```
@@ -31,7 +31,7 @@ class Juego(BaseModel):
 
 ## 2. Uso Moderno: `Annotated` y Valores por Defecto
 
-La forma recomendada (y más compatible con otras herramientas de Python) es usar `Annotated`. Además, aquí vemos cómo asignar un **valor por defecto** (`default=50`) para que el campo sea opcional al crear el objeto.
+La forma recomendada (y más compatible con otras herramientas de Python) es usar `Annotated`. Además, aquí vemos cómo asignar un **valor por defecto** (`default=50`) para que el campo sea opcional al crear el objeto; si no viene en el body se asigna `50`.
 
 ```python
 from typing import Annotated
@@ -39,21 +39,17 @@ from pydantic import BaseModel, Field
 
 class Juego(BaseModel):
     id: Annotated[int, Field(gt=0, examples=[2])]
-    
     titulo: Annotated[str, Field(min_length=4, examples=["Mario"])]
-    
     genero: Annotated[str, Field(min_length=4, examples=["Aventura"])]
-    
-    # Al tener un default, si el usuario no envía score, será 50
     score: Annotated[int, Field(gt=0, le=100, examples=[86], default=50)]
 
 ```
 
 ---
 
-## 3. Refactorización de Endpoints (HTTPException)
+## 3. Ajustar endpoints + uso de HTTPException
 
-Limpiamos el código eliminando conversiones manuales (`model_dump`) y usando excepciones estándar de HTTP para errores (como el 404).
+Ahora nos queda limpiar el código eliminando conversiones manuales (`model_dump`) e implementar excepciones estándar de HTTP para errores (como el 404).
 
 **Cambios Clave:**
 
@@ -69,24 +65,9 @@ def juego(id: int) -> Juego:
         if juego["id"] == id:
             return juego  # Retornamos el objeto directo, sin .model_dump() ni dict()
             
-    # Si termina el bucle y no lo encuentra, lanzamos el error 404
+    # Si termina el bucle y no lo encuentra, hacemos raise Exception
     raise HTTPException(status_code=404, detail="Juego no encontrado")
 
 ```
 
 > **Nota:** Al usar Pydantic en el retorno, ya no hace falta usar `.model_dump()` en el POST o PUT si defines que tu función retorna el modelo `Juego`. FastAPI lo serializa automáticamente.
-
----
-
-## 4. Cápsula: Clientes REST
-
-Es fundamental probar nuestra API con herramientas profesionales en lugar de solo el navegador.
-
-* **Thunderclient:** Extensión ligera para VS Code.
-* **Postman:** El estándar de la industria (muy completo pero pesado).
-* **Bruno (Recomendado):**
-    * Open Source.
-    * Guarda las colecciones directamente en tu carpeta del proyecto (git-friendly).
-    * Tiene una interfaz limpia y rápida.
-
-> Consulten el video de la cápsula para aprender a usar estos clientes.
