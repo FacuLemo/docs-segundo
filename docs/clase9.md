@@ -2,20 +2,23 @@
 
 ## 1. Nueva Estructura del Proyecto
 
-Hasta ahora teníamos todo en un solo archivo. Para trabajar profesionalmente, dividimos el código en carpetas y archivos según su responsabilidad.
+Hasta ahora teníamos todo en un solo archivo. Para trabajar profesionalmente, dividimos el código en carpetas y archivos según su responsabilidad. Esto se llama modularizar el proyecto.
 
-**Estructura recomendada:**
+**Estructura:**
 
 ```text
-mi_proyecto/
+src/
 ├── main.py           # Punto de entrada (solo configuración global)
-├── schemas.py        # Modelos de Pydantic (Antes estaban en main)
-└── routers/          # Carpeta para las rutas
+├── schemas/          # Modelos de Pydantic (Antes estaban en main)
+    └── juegos.py     # schemas para juegos   
+└── routers/          # Carpeta para las rutas (Path operations)
     └── juegos.py     # Lógica de los endpoints de juegos
 
 ```
 
-> **Nota:** En esta clase renombramos el concepto de "Modelos" (Pydantic) a **Schemas** para no confundirlos con los "Modelos" de base de datos (ORM) en el futuro.
+> **Nota:** En esta clase forzamos la nomenclatura de **Schemas** para los modelos de Pydantic, para no confundirlos con los "Modelos" de base de datos (ORM) en el futuro.
+
+> **Nota 2:** En el video yo nombro los .py de cada subcarpeta volviendo a especificar qué es (por ejemplo, juegos_schema.py), pero en realidad esto en una redundancia.
 
 ---
 
@@ -23,7 +26,7 @@ mi_proyecto/
 
 Cortamos las clases `BaseModel` (`Juego`, `JuegoUpdate`) de `main.py` y las pegamos en `schemas.py`.
 
-**Archivo:** `schemas.py`
+**Archivo:** `schemas/juegos.py`
 
 ```python
 from pydantic import BaseModel, Field
@@ -32,7 +35,7 @@ from typing import Annotated
 class Juego(BaseModel):
     id: Annotated[int, Field(gt=0)]
     titulo: str
-    # ... resto de campos
+    # ... etc
 
 ```
 
@@ -40,30 +43,31 @@ class Juego(BaseModel):
 
 ## 3. Paso 2: Crear el Router
 
-En lugar de usar `app = FastAPI()`, usamos `APIRouter` dentro de nuestros módulos. Esto nos permite definir rutas que luego "conectaremos" a la app principal.
+En lugar de usar `app = FastAPI()`, usamos `APIRouter` dentro de nuestros módulos. Esto nos permite definir rutas que luego "conectaremos" a la app principal (en main.py).
 
 **Archivo:** `routers/juegos.py`
 
 ```python
 from fastapi import APIRouter, HTTPException
-from ..schemas import Juego, JuegoUpdate # Importamos desde la carpeta superior
+from schemas.juegos import Juego, JuegoUpdate # Importamos Juego del módulo schemas
 
 # Creamos la instancia del router
-router = APIRouter()
+router = APIRouter() # también puede ser "juegos" directamente
 
-# Base de datos simulada (ahora vive aquí o en un servicio aparte)
+# Base de datos simulada (la traemos del main.py)
 juegos = [...]
 
 # Cambiamos @app por @router
-# Nota: Si usamos prefix en main, aquí la ruta puede ser solo "/"
-@router.get("/") 
+@router.get("/") #Ponemos "/" en la ruta porque luego encapsulamos todo en un prefijo "juegos"
 async def get_juegos() -> list[Juego]:
     return juegos
 
 @router.get("/{id}")
 def get_juego(id: int) -> Juego:
-    # ... lógica de búsqueda
+    # ... 
     pass
+
+#...
 
 ```
 
@@ -77,17 +81,16 @@ El archivo `main.py` queda mucho más limpio. Su única función ahora es inicia
 
 ```python
 from fastapi import FastAPI
-from routers.juegos import router as juegos_router # Importamos el router
+from routers.juegos import router as juegos_router # Importamos el router con un alias
 
 app = FastAPI()
 
-app.title = "Nuestra primera app"
+app.title = "Nuestra primera app (ahora modularizada)"
 
 # Conectamos el router a la app principal
+app.include_router(juegos_router, prefix="/juegos", tags=["juegos"])
 # prefix: Agrega "/juegos" antes de todas las rutas de este router
 # tags: Agrupa los endpoints en la documentación automática
-app.include_router(juegos_router, prefix="/juegos", tags=["juegos"])
-
 ```
 
 ### Ventajas de Modularizar

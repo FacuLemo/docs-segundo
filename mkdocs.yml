@@ -35,7 +35,7 @@ nav:
  - Clase 6. Validaciones y Pydantic: clase6.md
  - Clase 7. Pydantic Avanzado: clase7.md
  - Clase 8. Responses y clientes REST: clase8.md
-#   - Clase 9. Modularización con APIRouter: clase9.md
+ - Clase 9. Modularización y uso de APIRouter: clase9.md
 #   - Clase 10. Persistencia de Datos con SQLite y SQLAlchemy: clase10.md
 
 
