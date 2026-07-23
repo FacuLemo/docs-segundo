@@ -56,7 +56,7 @@ Base = declarative_base()
 
 ## 3. Paso 2: Crear el Modelo de Base de Datos
 
-Es vital no confundir los **Schemas** (Pydantic) con los **Modelos** (SQLAlchemy). Los modelos definen cómo se ve la tabla en el disco duro.
+Es vital no confundir los **Schemas** (Pydantic) con los **Modelos** (SQLAlchemy). Los modelos definen cómo se ve la tabla en la base de datos real, mientras el eschema sólo representa la estructura que debe seguir.
 
 **Archivo:** `models.py`
 
@@ -121,4 +121,4 @@ app.include_router(juegos_router, prefix="/juegos", tags=["juegos"])
 2. **Modelos vs Schemas:** El **Modelo** es para la base de datos; el **Schema** es para la validación de los datos que envía el usuario (Pydantic).
 3. **SessionLocal:** Es la "fábrica" de conexiones que usaremos para realizar operaciones CRUD.
 
-¿Te gustaría que preparemos la **Clase 11** para modificar los endpoints del router y que ya empiecen a guardar y leer datos reales de la base de datos?
+Quedará pendiente para la próxima clase adaptar nuestros path operations para que hagan uso de esta base de datos.
