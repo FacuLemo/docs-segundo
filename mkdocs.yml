@@ -38,6 +38,7 @@ nav:
  - Clase 9. Modularización y uso de APIRouter: clase9.md
  - Cápsula CORS. Conectando a un Frontend: capsula-cors.md
  - Clase 10. Persistencia de Datos con SQLite y SQLAlchemy: clase10.md
+ - Clase 11. Operaciones CRUD con SQLAlchemy: clase11.md
 
 
 markdown_extensions:

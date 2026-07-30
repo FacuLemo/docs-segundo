@@ -1,9 +1,3 @@
-Siguiendo el orden lógico del curso, una vez que tenemos configurada la base de datos y los modelos, la **Clase 11** debe enfocarse en cómo conectar esos modelos con los endpoints que ya teníamos.
-
-Aquí aprenderemos a usar la **Inyección de Dependencias** para realizar operaciones CRUD reales.
-
----
-
 # Clase 11. Operaciones CRUD con SQLAlchemy
 
 ## 1. El concepto de Session y Dependencia
@@ -34,7 +28,7 @@ router = APIRouter()
 
 ## 3. Paso 2: Endpoint para Leer Datos (GET)
 
-En lugar de devolver una lista estática, consultaremos la tabla `juegos` a través del ORM.
+En lugar de devolver una lista estática, consultaremos la tabla `juegos` de la db a través del ORM.
 
 **Archivo:** `routers/juegos.py`
 
@@ -47,7 +41,7 @@ def get_juegos(db: Session = Depends(get_db)):
 
 ```
 
-> **Nota:** `Depends(get_db)` se encarga de inyectar la sesión de la base de datos automáticamente en la variable `db`.
+> **Nota:** `Depends(get_db)` se encarga de inyectar la sesión de la base de datos automáticamente en la variable `db`. En otras palabras, nos permite tener acceso a la base de datos a través de esa variable
 
 ---
 
