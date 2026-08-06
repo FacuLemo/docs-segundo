@@ -1,5 +1,7 @@
 # Clase 12. Completando el CRUD y Resumen de Base de Datos
 
+En esta clase completamos las operaciones CRUD y hacemos un resumen de todo lo que hemos implementado.
+
 ## 1. Actualizar un Registro (PUT)
 
 Para actualizar un registro existente, primero debemos buscarlo en la base de datos. Si existe, reemplazamos sus valores con los datos nuevos proporcionados por el usuario y guardamos los cambios.
@@ -27,8 +29,6 @@ def update_juego(id: int, juego_actualizado: schemas.JuegoUpdate, db: Session = 
     
     return db_juego
 ```
-
-> **Nota:** Aquí usamos un schema hipotético llamado `JuegoUpdate` (que los alumnos deberían tener en `schemas.py` desde clases anteriores) para validar los datos de entrada específicos de una actualización.
 
 ---
 
@@ -59,11 +59,9 @@ def delete_juego(id: int, db: Session = Depends(get_db)):
 
 ---
 
-## 3. Gran Resumen: Integración de Bases de Datos en FastAPI
+## 3. Resumen: Integración de Bases de Datos en FastAPI
 
-
-
-Para que los alumnos no pierdan de vista el "bosque" por mirar los "árboles", este es el flujo completo de lo que hemos construido en estas últimas clases para conectar FastAPI con SQLite:
+Este es el flujo completo de lo que hemos construido en estas últimas clases para conectar FastAPI con SQLite:
 
 1. **La Configuración (`database.py`):** * Creamos el `engine` (el motor que se comunica con SQLite).
    * Creamos `SessionLocal` (la fábrica de sesiones para interactuar con el motor).
@@ -81,7 +79,7 @@ Para que los alumnos no pierdan de vista el "bosque" por mirar los "árboles", e
 
 5. **La Inyección en los Routers (`routers/`):**
    * En cada endpoint que necesita leer o escribir, agregamos el parámetro `db: Session = Depends(get_db)`.
-   * FastAPI se encarga mágicamente de ejecutar `get_db()`, darnos la conexión lista para usar y cerrarla al final.
+   * FastAPI se encarga automáticamente de ejecutar `get_db()`, darnos la conexión lista para usar y cerrarla al final.
 
 6. **El Flujo de Datos Diario (El CRUD):**
    * **Entrada:** El usuario envía JSON $\rightarrow$ FastAPI lo valida usando **Schemas** (Pydantic).

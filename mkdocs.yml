@@ -39,6 +39,7 @@ nav:
  - Cápsula CORS. Conectando a un Frontend: capsula-cors.md
  - Clase 10. Persistencia de Datos con SQLite y SQLAlchemy: clase10.md
  - Clase 11. Operaciones CRUD con SQLAlchemy: clase11.md
+ - Clase 12. CRUD completo y Resumen: clase12.md
 
 
 markdown_extensions:
