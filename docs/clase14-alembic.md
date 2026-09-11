@@ -1,5 +1,5 @@
 
-### Relaciones, Migraciones con Alembic y SQLModel
+### Migraciones con Alembic y SQLModel
 
 #### 1. ¿Qué es Alembic?
 
