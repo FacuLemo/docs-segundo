@@ -43,6 +43,7 @@ nav:
  - Clase 13. Migración a SQLModel, Unificando Modelos y Schemas: clase13.md
  - Clase 14. Migraciones con Alembic y SQLModel: clase14-alembic.md
  - Clase 15. Relaciones en DB con Alembic y SQLModel: clase15-relationships.md
+ - Clase 16. Paginación en FastAPI: clase16-paginacion.md
 
 
 markdown_extensions:
