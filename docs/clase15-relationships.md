@@ -1,7 +1,7 @@
 
-### Relaciones en DB con Alembic y SQLModel
+# Clase 15: Relaciones en DB con Alembic y SQLModel
 
-#### **Qué vemos:**
+### **Qué vemos:**
 
 1. El concepto de llaves foráneas (*Foreign Keys*).
 2. Aprender a definir relaciones bidireccionales usando `Relationship` de SQLModel.
@@ -10,13 +10,13 @@
 
 ---
 
-#### **Fase 1: Introducción**
+### **Fase 1: Introducción**
 
 Supongamos que tenemos que crear un Estudio para nuestros Juegos. Por ejemplo, de Mario Bros el estudio de desarrollo sería Nintendo. Pero no tenemos que escribir en str "Nintendo" para cada registro, porque puede generar inconsistencias (por ejemplo, que algunos registros estén en minúscula y otros en mayúscula).
 
 En estos casos lo que hay que hacer es crear una tabla nueva que almacene los estudios, y adaptar juego para que guarde una **relación** con dichos registros. De esta forma, tenemos consistencia y acceso a más datos que sólo el nombre (todos los campos que agreguemos a la tabla Estudio).
 
-#### **Fase 2: Refactorizando los Modelos**
+### **Fase 2: Refactorizando los Modelos**
 
 Usando lo que teníamos anteriormente, así es como debería evolucionar el archivo de modelos:
 
@@ -67,7 +67,7 @@ class JuegoPublic(JuegoBase):
 
 ```
 
-#### **Fase 3: El truco de SQLModel - Modelos con Relaciones**
+### **Fase 3: El truco de SQLModel - Modelos con Relaciones**
 
 Ahora que está la relación hay que tener cuidado con lo siguiente: Si devolvemos el modelo `Juego` crudo, podríamos generar un bucle infinito (El juego llama al estudio, el estudio llama al juego...).
 
@@ -101,7 +101,7 @@ alembic upgrade head
 > **Nota:** Si falla al ejecutar la migración, busquen manualmente el archivo de migración y busquen el método de `create_foreign_key`. Si el primer argumento está en None, cámbienlo por `'fk_juego_estudio_id`.
 
 
-#### **Fase 5:  Path Operations en FastAPI**
+### **Fase 5:  Path Operations en FastAPI**
 Ahora toca llevar esto a los endpoints.
 
 1. **Crear un Estudio:** `POST /estudios/` (Usando `EstudioCreate`).

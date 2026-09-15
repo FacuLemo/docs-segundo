@@ -1,11 +1,11 @@
 
-### Migraciones con Alembic y SQLModel
+# Clase 14: Migraciones con Alembic y SQLModel
 
-#### 1. ¿Qué es Alembic?
+### 1. ¿Qué es Alembic?
 
 Supongamos que queremos que nuestro juego tenga una relación de clave foránea a `Estudio`. No sólo hay que crear el modelo sino también el campo `estudio_id` a `Juego`. Cuando quiera hacer lo segundo, SQLAlchemy intentará crear la tabla primero, verá que ya existe y no hará nada, no agregando finalmente el nuevo campo. **Alembic** existe para tener un "control de versiones" (como Git) pero para la estructura de la base de datos. Cada cambio debe quedar registrado como un "commit", acá llamado "migración".
 
-#### 2. Instalación y Configuración
+### 2. Instalación y Configuración
 
 instalamos alembic:
 
@@ -21,14 +21,10 @@ alembic init alembic
 
 ```
 
-
-
 Esto creará una carpeta `/alembic` y un archivo `alembic.ini`.
 
 
-
-
-#### 3. Conectar Alembic con SQLModel 
+### 3. Conectar Alembic con SQLModel 
 
 1. **En app.py o main.py**: Comentar el SQLModel.metadata.create_all()
 
@@ -71,7 +67,7 @@ sqlalchemy.url = sqlite:///./db_juegos_sqlmodel.db
 <!-- 
 En el mismo `env.py`, asegúrate de que use tu URL de base de datos  -->
 
-#### 4. Generar la Migración Automática
+### 4. Generar la Migración Automática
 
 Una vez que el código de los modelos tiene las relaciones (como las que planeamos antes), ejecuta:
 
