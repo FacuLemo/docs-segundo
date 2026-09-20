@@ -47,10 +47,26 @@ from app.models import Juego, Estudio # Asegúrate de importar todos
 Busca la línea `target_metadata = None` y cámbiala por:
 ```python
 target_metadata = SQLModel.metadata
-
-#Luego agregar a los metadata: render_as_batch=True
 ```
 
+También tendremos que agregar `render_as_batch=True` como argumento extra dentro de los context.configure de cada función presente en `env.py`
+
+Nos quedaría:
+```python
+# en run_migrations_offline() :
+context.configure(
+        url=url,
+        target_metadata=target_metadata,
+        render_as_batch=True,
+        literal_binds=True,
+        dialect_opts={"paramstyle": "named"},
+    )
+
+# en run_migrations_online() :
+  context.configure(
+            connection=connection, render_as_batch=True, target_metadata=target_metadata
+        )
+```
 
 4. **Más configuraciones**
 Dentro de `script.py.mako` importar sqlmodel:
@@ -58,7 +74,7 @@ Dentro de `script.py.mako` importar sqlmodel:
 import sqlmodel
 ```
 
-En `alembic.ini` poner la dirección de la base de datos:
+En `alembic.ini` (fuera de la carpeta alembic) poner la dirección de la base de datos:
 ```python
 #Al rededor de la lína 89
 sqlalchemy.url = sqlite:///./db_juegos_sqlmodel.db
