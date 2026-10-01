@@ -44,6 +44,7 @@ nav:
  - Clase 14. Migraciones con Alembic y SQLModel: clase14-alembic.md
  - Clase 15. Relaciones en DB con Alembic y SQLModel: clase15-relationships.md
  - Clase 16. Paginación en FastAPI: clase16-paginacion.md
+ - Clase 17, 18 y 19. Autenticación de Usuarios con JWT: clase17-18-19.md
 
 
 markdown_extensions:
