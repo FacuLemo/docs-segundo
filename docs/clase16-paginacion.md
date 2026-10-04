@@ -107,7 +107,7 @@ Si todo salió bien, deberíamos ver nuestro response body de Juegos paginado, d
 
 ---
 
-# Cápsula. Filtros y Ordenamientos
+## Cápsula. Filtros y Ordenamientos
 
 Si queremos aplicar filtrado por campos y ordenamiento en nuestros endpoints, necesitamos implementar una **construcción progresiva de queries**: partimos de un `select(Juego)` base y encadenamos condiciones `.where()` únicamente para los parámetros que el cliente envió.
 
